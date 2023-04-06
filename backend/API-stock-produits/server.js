@@ -17,7 +17,7 @@
     const queryFile = require('./queryFile');
 //___________________________________________________________________________________________
     app.use(express.json());  // Middleware qui permet de lire l'objet request.body
-    app.use(express.urlencoded());   // Middleware pour remplir le requset . body avec url encodad et NON JSON 
+    app.use(express.urlencoded());   // Middleware pour remplir le requset. body avec url encodad et NON JSON 
 //___________________________________________________________________________________________
 
 //_____________Authentification : JWT _________________________________________________________
@@ -148,8 +148,6 @@
         return res.status(401).json({ message: 'Invalid token' });
       }
     };
-
-//____________________________________________________________________________________________
 
 //____________________________________________________________________________________________
 

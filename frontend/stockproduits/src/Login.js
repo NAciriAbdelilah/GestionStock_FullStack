@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react';
 import { Card, Container,Button, Row ,Col} from 'react-bootstrap';
 import { useNavigate } from "react-router-dom";
 
- 
 
 export default function Login() {
 
@@ -31,7 +30,6 @@ export default function Login() {
       })
       .catch((error) => alert("Erreur d'authentification!!!"));
       
-    
     };
 
     return (
