@@ -1,0 +1,99 @@
+
+/* ___________________________________________________________________________ */
+#cardlogin {
+  margin-top:100px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.card {
+  margin-top:20px;
+  margin-left: auto;
+  margin-right: auto;
+}
+input.larger {
+  width: 20px;
+  height: 20px; 
+}
+.h2 {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: center;
+  background-color: #aa0404df;
+  color: white;
+}
+.input, label{
+  font-size: 1.2rem;
+
+}
+.champ {
+  height:20px ;
+  width:50%;
+  padding: 3px;
+}
+.searchBar {
+  padding: 2rem ;
+  margin-left: 2%;
+
+}
+.searchBar input {
+  font-size: 1.2rem;
+}
+
+.button_tabel + .button_tabel{
+  margin-left:10px;
+}
+
+.field-Search {
+  width: 400px;
+  margin-left: 3%;
+  border: 1px solid #ddd;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.field {
+  width: 400px;
+  margin-left: 3%;
+  border: 0px solid #ddd;
+  font-family: Arial, Helvetica, sans-serif;
+
+}
+
+#mytable {
+  margin: auto;
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 90%;
+  
+}
+
+#mytable td, #mytable th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#mytable tr:nth-child(even){background-color: #f2f2f2;}
+
+#mytable tr:hover {background-color: #ddd;}
+
+#mytable th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: center;
+  background-color: #191a1a;
+  color: white;
+}
+/* ___________________________________________________________________________ */
+
+.App {
+  text-align: left;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
