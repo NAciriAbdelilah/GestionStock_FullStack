@@ -184,7 +184,7 @@ app.get('/products' , (req, res) => {
     })
 
 //_____ADD NEW PRODUCT________________________________________________________________________
-    app.post('/products', (req, res) => {
+    app.post('/products', authenticate,(req, res) => {
             
       const newData = [req.body.name, req.body.description, req.body.price, req.body.stock]
 
@@ -207,7 +207,7 @@ app.get('/products' , (req, res) => {
     
 //____DELETE PRODUCT BY ID VERSION 1__________________________________________________________
 
-    app.delete('/products/:id', (req, res) => {
+    app.delete('/products/:id', authenticate,(req, res) => {
     
       let id = req.params.id
     
@@ -230,7 +230,7 @@ app.get('/products' , (req, res) => {
 
 //____UPDATE PRODUCT BY ID VERSION 1_____________________________________________________________
 
-     app.put('/products/:id', (req, res) => {
+     app.put('/products/:id', authenticate, (req, res) => {
       const id = req.params.id;
       console.log(id,req.body)
       const {name, description, price, stock} = req.body;
