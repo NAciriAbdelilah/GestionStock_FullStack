@@ -16,14 +16,13 @@ function Products(){
     //____________________________________________________________________________________________
         const [productToUpdate, setProductToUpdate] = useState({}); 
     //____________________________________________________________________________________________
-
-    // Cette useEffect permet de recuperer les données depuis l'API au chargement du composant products
+        // Cette useEffect permet de recuperer les données depuis l'API au chargement du composant products
         useEffect(() => {
             getAllProducts();
         }, []); 
-
     //____________________________________________________________________________________________
-
+        //recupération du token dans le localstorage
+        const token = localStorage.getItem('token');
     //____________________________________________________________________________________________
        // function CHECKBOX IN STOCK SEARCH pour filter les produits
         
@@ -71,6 +70,7 @@ function Products(){
                 method: 'DELETE',
                 headers: {
                     "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`
                     },
               })
 
@@ -117,12 +117,13 @@ function Products(){
                <div>
                 <h2 className='h2' >Formulaire Gestion Produits</h2><br/>
                 <table id="mytable">
+                    <tbody>
                     <tr>
                         <td>
                         <fieldset className="field">
                             <legend><h3><Search/> Search Form</h3></legend>
                             <strong>Keyword:   
-                                    <input rows="5" size="45" maxlength="1000"
+                                    <input rows="5" size="45" maxLength="1000"
                                         type="text"
                                         name="searchBar"
                                         placeholder="Search.."
@@ -137,32 +138,35 @@ function Products(){
                             </strong>
                         </fieldset>
                         </td>
-                <td>
-                    {Object.keys(productToUpdate).length>0 ? (
-                    <ProductForm 
-                        productToFormProps = {productToUpdate}
-                        getAllProducts={getAllProducts}/>
-                    ) : (
-                    <ProductForm 
-                        getAllProducts = {getAllProducts} />
-                    )} 
+                        <td>
+                            {Object.keys(productToUpdate).length>0 ? (
+                            <ProductForm 
+                                productToFormProps = {productToUpdate}
+                                getAllProducts={getAllProducts}/>
+                            ) : (
+                            <ProductForm 
+                                getAllProducts = {getAllProducts} />
+                            )} 
 
-                </td>
-                    </tr>    
+                        </td>
+                    </tr> 
+                    </tbody>   
                 </table>  
                 </div>
 
                 <table id="mytable" >
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Name</th>
+                                    <th>Description</th>
+                                    <th>Price</th>
+                                    <th>Stock</th>
+                                    { token && <th colSpan="2">Action</th> } 
+                                    
+                                </tr>
+                            </thead>
                         <tbody>
-                            <tr>
-                                <th>Id</th>
-                                <th>Name</th>
-                                <th>Description</th>
-                                <th>Price</th>
-                                <th>Stock</th>
-                                <th colspan="2">Action</th>
-                                
-                            </tr>
                             {productFilter.map((product,index)=>(
                                 <tr key={index}>
                                     <td>{product.id}</td>
@@ -170,8 +174,9 @@ function Products(){
                                     <td>{product.description}</td>
                                     <td>{product.price}</td>
                                     <td>{product.stock ? ("En stock") : ("Pas en stock")}</td>
-                                    <td align="center"><Button variant="warning" onClick={() =>handleUpdate(product)}>Modifier</Button></td>
-                                    <td align="center"><Button variant="danger" onClick={() =>handleDelete(product.id)}>Supprimer</Button></td>
+                            { token && <td align="center"><Button variant="warning" onClick={() =>handleUpdate(product)}>Modifier</Button></td>}
+                            { token &&  <td align="center"><Button variant="danger" onClick={() =>handleDelete(product.id)}>Supprimer</Button></td>}
+                        
                                 </tr>
                             ))}
                         </tbody>

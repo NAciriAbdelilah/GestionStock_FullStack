@@ -126,7 +126,7 @@
             
           const token = jwt.sign({ email }, secret);
           res.json({ message: "Login successful", token });
-          
+          console.log('This is your Token : ', token);
         }
     });
 //___________________________________________________________________________________________
@@ -168,7 +168,7 @@ app.get('/products' , (req, res) => {
 })
 
 //____GET PRODUCT BY ID ________________________________________________________________________
-    app.get('/products/:id', (req, res) => {
+    app.get('/products/:id',authenticate, (req, res) => {
       let id = req.params.id
       let client = dbUtils.getClient()
       

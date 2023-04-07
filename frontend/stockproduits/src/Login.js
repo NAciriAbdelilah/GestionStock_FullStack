@@ -1,8 +1,9 @@
 import React from 'react'
-import { useState, useEffect } from 'react';
-import { Card, Container,Button, Row ,Col} from 'react-bootstrap';
+import { useState } from 'react';
+import { Card,Button} from 'react-bootstrap';
 import { useNavigate } from "react-router-dom";
-
+ //recupération du token dans le localstorage
+const token = localStorage.getItem('token');
 
 export default function Login() {
 
@@ -11,25 +12,31 @@ export default function Login() {
     const navigate = useNavigate();
 
     function handleSubmit (event) {
+
       event.preventDefault();
-      const response = fetch("http://localhost:5000/login", {
+      
+      fetch("http://localhost:5000/login", {
         method: "POST",
         body: JSON.stringify({ email, password }),
         credentials: "include",
         headers: {
           "Content-Type": "application/json",
         },
-        
       })
       .then((response) => response.json())    
       .then((data) => {
         if(data.token!==""){
           navigate("/products");
           console.log(data.token);
+          // Récupération du token au login dans réact
+          localStorage.setItem('token', data.token); 
+          
         }
       })
       .catch((error) => alert("Erreur d'authentification!!!"));
-      
+  
+
+
     };
 
     return (
@@ -70,8 +77,7 @@ export default function Login() {
                   </Card.Body>
             </form>
         </Card>
-    </>
-      
+      </>
     );
 
 }

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Card, Container,Button } from 'react-bootstrap';
+import {Button } from 'react-bootstrap';
 
 
 function ProductForm({productToFormProps = null, getAllProducts}) {
@@ -14,6 +14,7 @@ function ProductForm({productToFormProps = null, getAllProducts}) {
     });
 
 //____________________________________________________________________________________________
+    const token = localStorage.getItem('token');    
 //____________________________________________________________________________________________
 
     useEffect (()=> {
@@ -36,6 +37,7 @@ function ProductForm({productToFormProps = null, getAllProducts}) {
             body: JSON.stringify({...item}),
             headers: {
             "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
             },
         })
             .then((response) => response.json())
@@ -62,6 +64,7 @@ function ProductForm({productToFormProps = null, getAllProducts}) {
             body: JSON.stringify({...item}),
             headers: {
             "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
             },
         })
             .then((response) => response.json())
@@ -83,7 +86,7 @@ function ProductForm({productToFormProps = null, getAllProducts}) {
                             <legend><h3>{!productToFormProps ? "Add Product:" : "Update Product:"}</h3></legend>
                             <strong>
                             <label htmlFor="name">Product Name:</label>
-                            <input rows="5" size="44" maxlength="1000"
+                            <input rows="5" size="44" maxLength="1000"
                                 type="text" 
                                 value={item.name} 
                                 onChange={(event) => 
@@ -97,7 +100,7 @@ function ProductForm({productToFormProps = null, getAllProducts}) {
                                 setItem({...item, description: event.target.value})} required /><br/>
                 
                             <label htmlFor="price">Product Price:</label>
-                            <input rows="5" size="50" maxlength="1000"
+                            <input rows="5" size="50" maxLength="1000"
                                 type="number"   
                                 value={item.price} 
                                 onChange={(event) => 
@@ -111,9 +114,11 @@ function ProductForm({productToFormProps = null, getAllProducts}) {
                                 onChange={(event) => 
                                 setItem({...item, stock: event.target.checked})} /> En Stock<br/><br/> 
                             </strong>
+                            {token && 
                             <div className="d-grid gap-2">
                             <Button variant="success" size="lg" type="submit">{!productToFormProps ? "Save" : "Update"}</Button >
                             </div>
+                            }
                         </fieldset>
             </form>
     </div>
